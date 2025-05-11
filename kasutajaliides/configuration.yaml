@@ -1,0 +1,37 @@
+# Kasutajaliidese sisendväljade loomise YAML koodilõik. Lisada Home Assistanti configuration.yaml faili.
+
+input_select:
+  faasivalik2:
+    name: "Faasi valik [2]"
+    options:
+      - "OFF"
+      - "L1"
+      - "L2"
+      - "L3"
+    initial: "OFF"
+    icon: mdi:format-list-bulleted
+
+input_number:
+  hysteresis2:
+    name: "Hüsterees (s)"
+    min: 0
+    max: 60
+    step: 1
+    icon: mdi:timer
+    initial: 1
+
+  tarbimine2:
+    name: "Tarbimine [2]"
+    min: 0
+    max: 2000
+    step: 10
+    icon: mdi:fire
+    initial: 0
+
+  elektrihind2:
+    name: "Hind [2]"
+    min: -10
+    max: 15
+    step: 0.1
+    icon: mdi:currency-eur
+    initial: 0
