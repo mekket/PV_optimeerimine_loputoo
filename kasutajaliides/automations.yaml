@@ -1,0 +1,87 @@
+#Kasutajaliidese tööks vajalike automatsioonide loomise YAML koodilõigud. 
+#Iga väärtuse saatmiseks(kokku 5) tuleb luua eraldi automatsioon.
+
+#Elektri hinnapiiri seadistamise automatsioon
+alias: Elektri hinna saatmine üle MQTT[2]
+description: Elektri hinna saatmine üle MQTT[2]
+triggers:
+  - entity_id: input_number.elektrihind2
+    trigger: state
+conditions: []
+actions:
+  - data:
+      topic: elektrihind2
+      payload: "{{ states('input_number.elektrihind2') }}"
+      retain: true
+    action: mqtt.publish
+mode: single
+
+#Faasi valiku seadistamise automatsioon:
+alias: faasi[2] seadistamine üle MQTT
+description: faasi[2] seadistamine üle MQTT
+triggers:
+  - entity_id: input_select.faasivalik2
+    trigger: state
+conditions: []
+actions:
+  - data:
+      topic: faasivalik2
+      payload: |
+        {% if is_state('input_select.faasivalik2', 'L1') %}
+          1
+        {% elif is_state('input_select.faasivalik2', 'L2') %}
+          2
+        {% elif is_state('input_select.faasivalik2', 'L3') %}
+          3
+        {% else %}
+          0
+        {% endif %}
+      retain: true
+    action: mqtt.publish
+mode: single
+
+#Nordpooli hinna saatmise automatsioon:
+alias: Nordpooli hind MQTT
+description: Muutuse korral edastab Nordpooli hinna üle MQTT
+triggers:
+  - entity_id: sensor.nordpool_kwh_ee_eur_3_10_022 #See sensor luuakse Home Assistanti Nord Pool integratsiooniga.
+    trigger: state
+conditions: []
+actions:
+  - data:
+      topic: nordpool
+      payload: "{{ states('sensor.nordpool_kwh_ee_eur_3_10_022') }}"
+      retain: true
+    action: mqtt.publish
+mode: single
+
+#Ühendatud seadme nimivõimsuse limiidi automatsioon:
+alias: Seade[2] võimsuse limiidi seadistamine MQTT
+description: Seade[2] võimsuse limiidi seadistamine MQTT
+triggers:
+  - entity_id: input_number.tarbimine2
+    trigger: state
+conditions: []
+actions:
+  - data:
+      topic: tarbimine2
+      payload: "{{ states('input_number.tarbimine2') }}"
+      retain: true
+    action: mqtt.publish
+mode: single
+
+
+#Hüstereesi väärtuse automatsioon:
+alias: Hüstereesi[2] väärtus MQTT
+description: Hüstereesi[2] väärtus MQTT
+triggers:
+  - entity_id: input_number.hysteresis2
+    trigger: state
+conditions: []
+actions:
+  - data:
+      topic: hysteresis2
+      payload: "{{ states('input_number.hysteresis2') }}"
+      retain: true
+    action: mqtt.publish
+mode: single
