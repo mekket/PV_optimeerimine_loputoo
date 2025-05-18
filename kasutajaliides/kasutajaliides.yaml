@@ -1,0 +1,25 @@
+#YAML koodilõik töös väljatoodud kasutajaliidese loomiseks Home Assistantis. 
+
+
+type: entities
+entities:
+  - entity: sensor.nordpool_kwh_ee_eur_3_10_022
+  - entity: input_number.elektrihind2
+    name: Elektri hinnapiir (s/kWh)
+  - entity: input_number.hysteresis2
+  - entity: input_number.tarbimine2
+    name: Tarbija nimivõimsus(W)
+  - entity: input_select.faasivalik2
+    name: Faasi valik
+  - entity: sensor.l1_power
+  - entity: sensor.l2_power
+  - entity: sensor.l3_power
+  - entity: sensor.total_power
+
+title: 1 Releega tarbija[2]
+layout_options:
+  grid_columns: full
+  grid_rows: 8
+state_color: false
+show_header_toggle: true
+
